@@ -10,6 +10,7 @@ import SignUp from './components/auth/SignUp'
 import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
+import Chat from './components/AuthenticatedRoute/Chat'
 import Profile from './components/routes/Profile'
 
 class App extends Component {
@@ -87,6 +88,15 @@ class App extends Component {
               <ChangePassword msgAlert={this.msgAlert} user={user} />
             )}
           />
+
+          <AuthenticatedRoute
+            user={user}
+            path='/chat'
+            render={() => (
+              <Chat user={user} />
+            )}
+          />
+
           <AuthenticatedRoute
             user={user}
             path='/profile'
