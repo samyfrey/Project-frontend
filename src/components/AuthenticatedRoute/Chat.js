@@ -9,7 +9,7 @@ const socket = io('http://localhost:4741', {
 })
 
 function Chat ({ user }) {
-  const [state, setState] = useState({ message: '', name: 'chad' })
+  const [state, setState] = useState({ message: '', name: user.email })
   const [chat, setChat] = useState([])
 
   useEffect(() => {

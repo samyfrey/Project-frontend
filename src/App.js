@@ -11,6 +11,7 @@ import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 import Chat from './components/AuthenticatedRoute/Chat'
+import Profile from './components/routes/Profile'
 
 class App extends Component {
   constructor (props) {
@@ -92,6 +93,14 @@ class App extends Component {
             path='/chat'
             render={() => (
               <Chat user={user} />
+            )}
+          />
+
+          <AuthenticatedRoute
+            user={user}
+            path='/profile'
+            render={() => (
+              <Profile msgAlert={this.msgAlert} user={user} />
             )}
           />
         </main>
