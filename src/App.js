@@ -88,6 +88,7 @@ class App extends Component {
               <ChangePassword msgAlert={this.msgAlert} user={user} />
             )}
           />
+
           <AuthenticatedRoute
             user={user}
             path='/chat'
