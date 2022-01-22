@@ -2,15 +2,15 @@ import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-import submitProfile from '../../api/profile'
+import { createProfile } from '../../api/routes'
 
-const Profile = () => {
+function Profile ({ user }) {
   const [userName, setUserName] = useState('')
 
   const onSubmitProfile = (event) => {
     event.preventDefault()
 
-    submitProfile(userName)
+    createProfile(userName, user)
       .then(res => console.log(res))
       .catch(console.error)
   }
