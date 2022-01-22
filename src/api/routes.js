@@ -11,24 +11,33 @@ export const getUserProfile = (user) => {
   })
 }
 
-export const createProfile = (user, formData) => {
+export const createProfile = (formData, user) => {
+  console.log('token is', user.token)
   return axios({
-    url: apiUrl + '/profile/',
+    url: apiUrl + '/profile/create',
     method: 'POST',
     headers: {
       Authorization: `Bearer ${user.token}`
     },
-    data: formData
+    data: {
+      userProfile: {
+        username: formData
+      }
+    }
   })
 }
 
-export const updateProfile = (user, formData) => {
+export const updateProfile = (formData, user) => {
   return axios({
-    url: apiUrl + `/profile/${user.userProfile}`,
+    url: apiUrl + `/profile/${user.userProfile[0].id}`,
     method: 'PATCH',
     headers: {
       Authorization: `Bearer ${user.token}`
     },
-    data: formData
+    data: {
+      userProfile: {
+        username: formData
+      }
+    }
   })
 }
