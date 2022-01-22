@@ -26,9 +26,18 @@ const alwaysOptions = (
 )
 
 const Header = ({ user }) => (
-  <Navbar bg='primary' variant='dark' expand='md'>
+  <Navbar className='color-nav' variant='dark' expand='md'>
     <Navbar.Brand>
-      <Link to='/' style={{ color: '#FFF', textDecoration: 'none' }}>react-auth-template</Link>
+      <img
+        alt='MSN'
+        src='https://www.clipartmax.com/png/full/83-836045_msn-boneco-logo-vector-msn-messenger-logo-png.png'
+        width='70'
+        height='70'
+      />
+      <Link to='/' style={{ color: '#000', textDecoration: 'none' }}>
+
+Chatter Box
+      </Link>
     </Navbar.Brand>
     <Navbar.Toggle aria-controls='basic-navbar-nav' />
     <Navbar.Collapse id='basic-navbar-nav'>
