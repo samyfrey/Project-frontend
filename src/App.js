@@ -101,7 +101,7 @@ class App extends Component {
             user={user}
             path='/profile'
             render={() => (
-              <Profile msgAlert={this.msgAlert} user={user} />
+              <Profile user={user} />
             )}
           />
         </main>
