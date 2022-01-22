@@ -4,14 +4,21 @@ import io from 'socket.io-client'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
+// import { getUserProfile } from '../../api/routes'
+
 const socket = io('http://localhost:4741', {
   withCredentials: true
 })
 
 function Chat ({ user }) {
-  const [state, setState] = useState({ message: '', name: user.userProfile[0].username })
-
+  const [state, setState] = useState({ message: '', name: 'Guest' })
   const [chat, setChat] = useState([])
+
+  useEffect(() => {
+    if (user.userProfile[0]) {
+      setState({ name: user.userProfile[0].username })
+    }
+  }, [])
 
   useEffect(() => {
     socket.on('message', ({ name, message }) => {

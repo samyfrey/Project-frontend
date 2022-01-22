@@ -93,7 +93,7 @@ class App extends Component {
             user={user}
             path='/chat'
             render={() => (
-              <Chat user={user} />
+              <Chat msgAlert={this.msgAlert} user={user} />
             )}
           />
 
@@ -101,7 +101,7 @@ class App extends Component {
             user={user}
             path='/profile'
             render={() => (
-              <Profile user={user} />
+              <Profile msgAlert={this.msgAlert} user={user} />
             )}
           />
         </main>
