@@ -1,5 +1,20 @@
 @import '~bootstrap/scss/bootstrap';
 
 .color-nav {
-    background-color: rgb(216, 227, 241)
+    background-color: rgb(216, 227, 241);
+    // outline-style: solid;
+    // outline-color: black;
+    // outline-width: 1px;
+    margin: auto 150px;
+    margin-top: 20px;
+    height: 35px;
+    text-align: center
+}
+
+// .box {
+//     outline-color: black;
+//     outline-style: solid
+// }
+.nav-link {
+ color: black;
 }

@@ -2,13 +2,17 @@ import React, { Fragment } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import { Link, NavLink } from 'react-router-dom'
+import { Button } from './../styles/Button.styled'
 
 const authenticatedOptions = (
   <Fragment>
     <NavLink to='/profile' className='nav-link'>Profile</NavLink>
     <NavLink to='/change-password' className='nav-link'>Change Password</NavLink>
-    <NavLink to='/sign-out' className='nav-link'>Sign Out</NavLink>
     <NavLink to='/chat' className='nav-link'>Chat</NavLink>
+    <NavLink to='/sign-out' className='nav-link'>Sign Out</NavLink>
+    <NavLink to='/chat'>
+      <Button>Chat Now</Button>
+    </NavLink>
   </Fragment>
 )
 
@@ -26,15 +30,15 @@ const alwaysOptions = (
 )
 
 const Header = ({ user }) => (
-  <Navbar className='color-nav' variant='dark' expand='md'>
+  <Navbar className='color-nav' expand='md'>
     <Navbar.Brand>
       <img
         alt='MSN'
         src='https://www.clipartmax.com/png/full/83-836045_msn-boneco-logo-vector-msn-messenger-logo-png.png'
-        width='70'
-        height='70'
+        width='30'
+        height='30'
       />
-      <Link to='/' style={{ color: '#000', textDecoration: 'none' }}>
+      <Link to='/' style={{ color: 'rgb(20, 48, 142)', textDecoration: 'none', margin: '2rem' }}>
 
 Chatter Box
       </Link>
