@@ -10,7 +10,12 @@ const displayPicture = 'http://2.bp.blogspot.com/_r1kMibaacEs/TLVQgzYP33I/AAAAAA
 
 // import { getUserProfile } from '../../api/routes'
 
-const socket = io('http://localhost:4741', {
+// dev server
+// const socket = io('http://localhost:4741', {
+//   withCredentials: true
+// })
+// production server
+const socket = io('https://reactors-chatterbox.herokuapp.com/', {
   withCredentials: true
 })
 
@@ -37,7 +42,7 @@ function Chat ({ user }) {
   }
 
   const handleKeyPress = event => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && !event.shiftKey) {
       onMessageSubmit(event)
     }
   }
