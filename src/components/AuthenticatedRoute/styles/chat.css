@@ -11,7 +11,7 @@ button {
   border: 1px solid #C4D5DF;
   border-radius: 2%;
   box-shadow: 2px 2px rgba(0,0,0,.3);
-  height: 600px;
+  height: 620px;
   width: 720px;
   transform-origin: center center;
   margin: 5vh auto
@@ -100,14 +100,16 @@ button {
 }
 
 .message-submit {
+  display:block;
   float: right;
   position: relative;
-  margin-top: -39px;
-  height: 6vh
+  margin-top: -110px;
+  margin-right: -20px;
+  height: 12vh
 }
 
-.message-submit-button {
-  height: 3vh;
+.message-submit-button, .message-clear-button {
+  height: 50%;
   margin-right: 2px;
 }
 

@@ -10,7 +10,12 @@ const displayPicture = 'http://2.bp.blogspot.com/_r1kMibaacEs/TLVQgzYP33I/AAAAAA
 
 // import { getUserProfile } from '../../api/routes'
 
-const socket = io('http://localhost:4741', {
+// dev server
+// const socket = io('http://localhost:4741', {
+//   withCredentials: true
+// })
+// production server
+const socket = io('https://reactors-chatterbox.herokuapp.com/', {
   withCredentials: true
 })
 
@@ -34,6 +39,17 @@ function Chat ({ user }) {
   const handleChange = event => {
     setState({ ...state, [event.target.name]: event.target.value })
     console.log('name ', event.target.name, '  val ', event.target.value)
+  }
+
+  const handleKeyPress = event => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      onMessageSubmit(event)
+    }
+  }
+
+  const handleReset = event => {
+    event.preventDefault()
+    setState({ message: '' })
   }
 
   const onMessageSubmit = event => {
@@ -82,7 +98,7 @@ function Chat ({ user }) {
           </div>
           <div className='item send-message'>
             <div className='message_buttons-bar'>
-              <button className='message-buttons' title='Send an emoticon'>
+              {/* <button className='message-buttons' title='Send an emoticon'>
   😊
               </button>
               <button className='message-buttons' title='Send a wink'>
@@ -99,7 +115,7 @@ function Chat ({ user }) {
               </button>
               <button className='message-buttons' title='Change text color'>
   🎨
-              </button>
+              </button> */}
             </div>
             <div>
               <Form
@@ -109,25 +125,34 @@ function Chat ({ user }) {
                   <Form.Control
                     required
                     type='text'
+                    as='textarea'
+                    rows='4'
                     name='message'
                     value={state.message}
                     placeholder='Enter message'
                     className='message-box'
                     onChange={(e) => handleChange(e)}
+                    onKeyPress={handleKeyPress}
                   />
-                  <div className='message-submit'>
+                  <div className='message-submit col-2'>
                     <Button
                       className = 'message-submit-button'
                       variant='primary'
                       type='submit'>
                       <u>S</u>end
                     </Button>
+                    <Button
+                      className = 'message-clear-button'
+                      variant='secondary'
+                      onClick={handleReset}>
+                      <u>C</u>lear
+                    </Button>
                   </div>
                 </Form.Group>
               </Form>
             </div>
+            {/* <div className="sent-message-info">Last message received at 2:00 PM on 12/16/2006.</div> */}
           </div>
-          {/* <div class="sent-message-info">Last message received at 2:00 PM on 12/16/2006.</div> */}
           <div className='item img'>
             <div className='img-display-picture'>
               <img src={displayPicture} />
