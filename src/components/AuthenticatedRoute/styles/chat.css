@@ -1,6 +1,7 @@
 * {
   font-family: sans-serif;
 }
+
 button {
   cursor: pointer;
 }
@@ -34,19 +35,23 @@ button {
   border: 0;
   grid-column: 1 / -1;
 }
+
 .top-bar {
   display: flex;
   padding: 10px;
 }
+
 .username {
   font-weight: bold;
   margin-bottom: 3px;
 }
+
 .logo {
   height: 100%;
   margin-right: 5px;
   width: 30px;
 }
+
 .bar__bottom {
   background: rgb(247,253,255);
   background: linear-gradient(180deg, rgba(247,253,255,1) 0%, rgba(214,227,234,1) 50%, rgba(238,249,250,1) 100%);  
@@ -55,15 +60,6 @@ button {
   display: flex;
   height: 50px;
 }
-.action__button {
-  background: transparent;
-  border: 0;
-  font-size: 1.5rem;
-}
-.action__button:active {
-  background: #E9F3F6;
-  outline: 1px solid #D2DDE0;
-}
 
 .img {
   background-color: #FAFBFD;
@@ -71,26 +67,27 @@ button {
   padding: 10px;
   position: relative;
 }
+
 .img-display-picture {
   border: 1px solid #E4EBE3;
   padding: 2px;
 }
+
 .img-display-picture img {
   max-width: 125px;
   max-height: 125px
 }
 
-.conversation {
+.chat-box {
   background-color: #FAFBFD;
   padding: 5% 0;
 }
-p {
-  margin: 7px;
-}
+
 .message-scroll {
   height: 300px;
   overflow-y: auto;
 }
+
 .message {
   margin-left: 20px;
   width:fit-content;
@@ -101,19 +98,23 @@ p {
   border: 0;
   font-size: 1.3rem;
 }
+
 .message-submit {
   float: right;
   position: relative;
   margin-top: -39px;
   height: 6vh
 }
+
 .message-submit-button {
   height: 3vh;
   margin-right: 2px;
 }
+
 .message-box {
   max-width: 87%;
 }
+
 /* .sent-message-info {
   align-items: center;
   background-color: #FBFBFF;

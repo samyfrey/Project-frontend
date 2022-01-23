@@ -72,7 +72,7 @@ function Chat ({ user }) {
           </div>
         </div>
         <div className='container'>
-          <div className='item conversation'>
+          <div className='item chat-box'>
             {renderChat()}
           </div>
           <div className='item img'>
