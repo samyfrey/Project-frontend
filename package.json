@@ -1,6 +1,6 @@
 {
-  "homepage": "http://The-Re-Actors.github.io/Project-frontend",
-  "name": "Project-frontend",
+  "homepage": "http://The-Re-Actors.github.io/Chatterbox-client",
+  "name": "Chatterbox-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
