@@ -11,7 +11,7 @@ import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 import Chat from './components/AuthenticatedRoute/Chat'
-import Profile from './components/routes/Profile'
+import Profile from './components/AuthenticatedRoute/Profile'
 
 class App extends Component {
   constructor (props) {
