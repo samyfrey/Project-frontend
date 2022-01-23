@@ -2,17 +2,22 @@ import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-import { createProfile } from '../../api/routes'
+import { createProfile, deleteProfile } from '../../api/routes'
 import { createProfileSuccess, createProfileFailure } from '../AutoDismissAlert/messages'
 
 function Profile ({ msgAlert, user }) {
   const [userName, setUserName] = useState('')
-
+  const [profileList, setProfileList] = useState(user.userProfile)
+  console.log('setlist ', setProfileList)
+  console.log('proflist ', profileList)
   const onSubmitProfile = (event) => {
     event.preventDefault()
 
     createProfile(userName, user)
-      .then(res => console.log(res))
+      .then(res => {
+        console.log(res.data.userProfile)
+        setProfileList(prev => [...prev, res.data.userProfile])
+      })
       .then(() =>
         msgAlert({
           heading: 'Username Created Successfully',
@@ -33,6 +38,29 @@ function Profile ({ msgAlert, user }) {
     setUserName(target.value)
   }
 
+  const onDeleteProfile = (event) => {
+    console.log('id ', event.target.className.slice(0, 24))
+    const id = event.target.className.slice(0, 24)
+    deleteProfile(id, user)
+      .then(() => {
+        console.log('deletion successful')
+        const array = profileList.filter(prof => prof._id !== id)
+        setProfileList(array)
+      })
+      .catch(console.error)
+  }
+
+  const renderProfiles = () => {
+    return profileList.map(({ username, _id }, index) => (
+      <div key={index}>
+        <h3>
+          {username}
+        </h3>
+        <Button className={_id} variant='danger' type='button' onClick={onDeleteProfile}>Delete</Button>
+      </div>
+    ))
+  }
+
   return (
     <div className='row'>
       <div className='col-sm-10 col-md-8 mx-auto mt-5'>
@@ -51,6 +79,9 @@ function Profile ({ msgAlert, user }) {
           </Form.Group>
           <Button variant='primary' type='submit'>Submit</Button>
         </Form>
+        <div>
+          {renderProfiles()}
+        </div>
       </div>
     </div>
   )
