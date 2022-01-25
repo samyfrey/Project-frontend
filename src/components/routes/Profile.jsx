@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-import submitProfile from '../../api/profile'
+import { createProfile } from '../../api/routes'
+import { createProfileSuccess, createProfileFailure } from '../AutoDismissAlert/messages'
 
-const Profile = () => {
+function Profile ({ msgAlert, user }) {
   const [userName, setUserName] = useState('')
 
   const onSubmitProfile = (event) => {
@@ -12,7 +13,20 @@ const Profile = () => {
 
     submitProfile(userName)
       .then(res => console.log(res))
-      .catch(console.error)
+      .then(() =>
+        msgAlert({
+          heading: 'Username Created Successfully',
+          message: createProfileSuccess,
+          variant: 'success'
+        }))
+      .catch(error => {
+        setUserName('')
+        msgAlert({
+          heading: 'Username Creation Failed with error: ' + error.message,
+          message: createProfileFailure,
+          variant: 'danger'
+        })
+      })
   }
 
   const handleChange = ({ target }) => {
