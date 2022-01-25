@@ -65,7 +65,7 @@ function Chat ({ user }) {
         {chat.map(({ name, message }, index) => (
           <div key={index}>
             <h3>
-              {name}: <span style={{ color: textColor }}>{message}</span>
+              <span style={{ fontWeight: 'bold' }}>{name}:</span> <span style={{ color: textColor }}>{message}</span>
             </h3>
           </div>
         ))}
