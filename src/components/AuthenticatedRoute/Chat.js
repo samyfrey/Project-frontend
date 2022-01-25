@@ -34,7 +34,6 @@ function Chat ({ user }) {
 
   const handleChange = event => {
     setState({ ...state, [event.target.name]: event.target.value })
-    console.log('name ', event.target.name, '  val ', event.target.value)
   }
 
   const handleKeyPress = event => {
