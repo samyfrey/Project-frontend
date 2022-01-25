@@ -6,24 +6,24 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import ScrollToBottom from 'react-scroll-to-bottom'
 
-import { getUserProfile } from '../../api/routes'
+import './styles/chat.css'
+const displayPicture = 'http://2.bp.blogspot.com/_r1kMibaacEs/TLVQgzYP33I/AAAAAAAAJXk/j8T-F70lTQ8/s320/Windows+Live+Messenger+2011+v15.4.3502.922+FINAL+%28Espa%C3%B1ol%29.jpg'
 
-const socket = io('http://localhost:4741', {
+// import { getUserProfile } from '../../api/routes'
+
+// dev server
+const socket = io(apiUrl, {
   withCredentials: true
 })
 
 function Chat ({ user }) {
   const [state, setState] = useState({ message: '', name: 'Guest' })
-
   const [chat, setChat] = useState([])
 
   useEffect(() => {
-    getUserProfile(user)
-      .then((res) => {
-        console.log(res)
-        setState({ name: user.userProfile[0].username })
-      })
-      .catch(console.error)
+    if (user.userProfile[0]) {
+      setState({ name: user.userProfile[0].username })
+    }
   }, [])
 
   useEffect(() => {
