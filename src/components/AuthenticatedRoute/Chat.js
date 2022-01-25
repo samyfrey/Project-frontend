@@ -17,7 +17,11 @@ const socket = io(apiUrl, {
 })
 
 function Chat ({ user }) {
+<<<<<<< HEAD
   const [state, setState] = useState({ message: '', name: 'Guest' })
+=======
+  const [state, setState] = useState({ message: '', name: user.email })
+>>>>>>> 73dc42e (merge conflict with profile.jsx)
   const [chat, setChat] = useState([])
 
   useEffect(() => {
