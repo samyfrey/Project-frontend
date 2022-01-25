@@ -12,6 +12,7 @@ import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 import Chat from './components/AuthenticatedRoute/Chat'
 import Profile from './components/AuthenticatedRoute/Profile'
+import { StyledContainer } from './components/styles/Container.styled'
 
 class App extends Component {
   constructor (props) {
@@ -45,63 +46,65 @@ class App extends Component {
     const { msgAlerts, user } = this.state
 
     return (
-      <Fragment>
-        <Header user={user} />
-        {msgAlerts.map(msgAlert => (
-          <AutoDismissAlert
-            key={msgAlert.id}
-            heading={msgAlert.heading}
-            variant={msgAlert.variant}
-            message={msgAlert.message}
-            id={msgAlert.id}
-            deleteAlert={this.deleteAlert}
-          />
-        ))}
-        <main className='container'>
-          <Route
-            path='/sign-up'
-            render={() => (
-              <SignUp msgAlert={this.msgAlert} setUser={this.setUser} />
-            )}
-          />
-          <Route
-            path='/sign-in'
-            render={() => (
-              <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
-            )}
-          />
-          <AuthenticatedRoute
-            user={user}
-            path='/sign-out'
-            render={() => (
-              <SignOut
-                msgAlert={this.msgAlert}
-                clearUser={this.clearUser}
-                user={user}
-              />
-            )}
-          />
-          <AuthenticatedRoute
-            user={user}
-            path='/change-password'
-            render={() => (
-              <ChangePassword msgAlert={this.msgAlert} user={user} />
-            )}
-          />
+      <StyledContainer>
+        <Fragment>
+          <Header user={user} />
+          {msgAlerts.map((msgAlert) => (
+            <AutoDismissAlert
+              key={msgAlert.id}
+              heading={msgAlert.heading}
+              variant={msgAlert.variant}
+              message={msgAlert.message}
+              id={msgAlert.id}
+              deleteAlert={this.deleteAlert}
+            />
+          ))}
+          <main className='container'>
+            <Route
+              path='/sign-up'
+              render={() => (
+                <SignUp msgAlert={this.msgAlert} setUser={this.setUser} />
+              )}
+            />
+            <Route
+              path='/sign-in'
+              render={() => (
+                <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
+              )}
+            />
+            <AuthenticatedRoute
+              user={user}
+              path='/sign-out'
+              render={() => (
+                <SignOut
+                  msgAlert={this.msgAlert}
+                  clearUser={this.clearUser}
+                  user={user}
+                />
+              )}
+            />
+            <AuthenticatedRoute
+              user={user}
+              path='/change-password'
+              render={() => (
+                <ChangePassword msgAlert={this.msgAlert} user={user} />
+              )}
+            />
 
-          <AuthenticatedRoute
-            user={user}
-            path='/chat'
-            render={() => <Chat msgAlert={this.msgAlert} user={user} />}
-          />
+            <AuthenticatedRoute
+              user={user}
+              path='/chat'
+              render={() => <Chat msgAlert={this.msgAlert} user={user} />}
+            />
 
-          <AuthenticatedRoute
-            user={user}
-            path='/profile'
-            render={() => <Profile msgAlert={this.msgAlert} user={user} />}
-          />
-        </main>
-      </Fragment>
+            <AuthenticatedRoute
+              user={user}
+              path='/profile'
+              render={() => <Profile msgAlert={this.msgAlert} user={user} />}
+            />
+          </main>
+        </Fragment>
+      </StyledContainer>
     )
   }
 }

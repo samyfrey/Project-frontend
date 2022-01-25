@@ -2,7 +2,6 @@ import React, { Fragment } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import { Link, NavLink } from 'react-router-dom'
-import { StyledHeader } from '../styles/Header.styled'
 
 const authenticatedOptions = (
   <Fragment>
@@ -27,24 +26,25 @@ const alwaysOptions = (
 )
 
 const Header = ({ user }) => (
-  <StyledHeader>
-    <Navbar>
-      <Navbar.Brand>
-        <Link to='/' style={{ color: '#14549B', textDecoration: 'none' }}>Chatterbox
-        </Link>
-      </Navbar.Brand>
-      <Navbar.Toggle aria-controls='basic-navbar-nav' />
-      <Navbar.Collapse id='basic-navbar-nav'>
-        <Nav className='ml-auto'>
-          {user && (
-            <span className='navbar-text mr-2'>Welcome, {user.email}</span>
-          )}
-          {alwaysOptions}
-          {user ? authenticatedOptions : unauthenticatedOptions}
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
-  </StyledHeader>
+  <Navbar>
+    <Navbar.Brand>
+      <Link to='/'>
+        <img src='images/logo_white.png' alt='logo' />
+      </Link>
+    </Navbar.Brand>
+
+    <Navbar.Toggle aria-controls='basic-navbar-nav' />
+    <Navbar.Collapse id='basic-navbar-nav'>
+      <Nav className='ml-auto'>
+        {user && (
+          <span className='navbar-text mr-2'>Welcome, {user.email}</span>
+        )}
+        {alwaysOptions}
+        {user ? authenticatedOptions : unauthenticatedOptions}
+      </Nav>
+    </Navbar.Collapse>
+
+  </Navbar>
 )
 
 export default Header
