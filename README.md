@@ -4,7 +4,7 @@ Chatterbox allows users to pick a username upon entering, and start messaging wi
 
 # Important Links
 
-insert heroku deployment link here
+https://the-re-actors.github.io/Chatterbox-client/
 
 # Planning Story
 

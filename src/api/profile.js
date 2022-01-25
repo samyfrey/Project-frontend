@@ -27,9 +27,9 @@ export const createProfile = (formData, user) => {
   })
 }
 
-export const updateProfile = (formData, user) => {
+export const updateProfile = (id, formData, user) => {
   return axios({
-    url: apiUrl + `/profile/${user.userProfile[0].id}`,
+    url: apiUrl + `/profile/${id}`,
     method: 'PATCH',
     headers: {
       Authorization: `Bearer ${user.token}`
