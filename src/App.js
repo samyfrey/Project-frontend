@@ -47,9 +47,10 @@ class App extends Component {
 
     return (
       <StyledContainer>
+
         <Fragment>
           <Header user={user} />
-          {msgAlerts.map((msgAlert) => (
+          {msgAlerts.map(msgAlert => (
             <AutoDismissAlert
               key={msgAlert.id}
               heading={msgAlert.heading}
