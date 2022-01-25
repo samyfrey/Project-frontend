@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import io from 'socket.io-client'
+import apiUrl from '../../apiConfig'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -11,11 +12,7 @@ const displayPicture = 'http://2.bp.blogspot.com/_r1kMibaacEs/TLVQgzYP33I/AAAAAA
 // import { getUserProfile } from '../../api/routes'
 
 // dev server
-// const socket = io('http://localhost:4741', {
-//   withCredentials: true
-// })
-// production server
-const socket = io('https://reactors-chatterbox.herokuapp.com/', {
+const socket = io(apiUrl, {
   withCredentials: true
 })
 
@@ -33,7 +30,6 @@ function Chat ({ user }) {
     socket.on('message', ({ name, message }) => {
       setChat([...chat, { name, message }])
     })
-    console.log('user ', user)
   })
 
   const handleChange = event => {
@@ -83,7 +79,7 @@ function Chat ({ user }) {
               src='https://www.clipartmax.com/png/small/83-836045_msn-boneco-logo-vector-msn-messenger-logo-png.png'
             />
             <div className='contact'>
-              <div className='username'>{user.userProfile[0].username}</div>
+              <div className='username'>{state.name}</div>
             </div>
           </div>
         </div>

@@ -8,7 +8,7 @@ import { createProfileSuccess, createProfileFailure } from '../AutoDismissAlert/
 function Profile ({ msgAlert, user }) {
   const [userName, setUserName] = useState('')
   const [profileList, setProfileList] = useState(user.userProfile)
-  console.log('setlist ', setProfileList)
+
   console.log('proflist ', profileList)
   const onSubmitProfile = (event) => {
     event.preventDefault()
