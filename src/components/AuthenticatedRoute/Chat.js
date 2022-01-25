@@ -7,7 +7,8 @@ import Button from 'react-bootstrap/Button'
 import ScrollToBottom from 'react-scroll-to-bottom'
 
 import './styles/chat.css'
-const displayPicture = 'http://2.bp.blogspot.com/_r1kMibaacEs/TLVQgzYP33I/AAAAAAAAJXk/j8T-F70lTQ8/s320/Windows+Live+Messenger+2011+v15.4.3502.922+FINAL+%28Espa%C3%B1ol%29.jpg'
+const displayPicture =
+	'http://2.bp.blogspot.com/_r1kMibaacEs/TLVQgzYP33I/AAAAAAAAJXk/j8T-F70lTQ8/s320/Windows+Live+Messenger+2011+v15.4.3502.922+FINAL+%28Espa%C3%B1ol%29.jpg'
 
 // import { getUserProfile } from '../../api/routes'
 
@@ -17,11 +18,7 @@ const socket = io(apiUrl, {
 })
 
 function Chat ({ user }) {
-<<<<<<< HEAD
   const [state, setState] = useState({ message: '', name: 'Guest' })
-=======
-  const [state, setState] = useState({ message: '', name: user.email })
->>>>>>> 73dc42e (merge conflict with profile.jsx)
   const [chat, setChat] = useState([])
 
   useEffect(() => {
@@ -36,22 +33,22 @@ function Chat ({ user }) {
     })
   })
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.value })
   }
 
-  const handleKeyPress = event => {
+  const handleKeyPress = (event) => {
     if (event.key === 'Enter' && !event.shiftKey) {
       onMessageSubmit(event)
     }
   }
 
-  const handleReset = event => {
+  const handleReset = (event) => {
     event.preventDefault()
     setState({ message: '' })
   }
 
-  const onMessageSubmit = event => {
+  const onMessageSubmit = (event) => {
     event.preventDefault()
     const { name, message } = state
     socket.emit('message', { name, message })
@@ -87,9 +84,7 @@ function Chat ({ user }) {
           </div>
         </div>
         <div className='container'>
-          <div className='item chat-box'>
-            {renderChat()}
-          </div>
+          <div className='item chat-box'>{renderChat()}</div>
           <div className='item img'>
             <div className='img-display-picture'>
               <img src={displayPicture} />
@@ -117,8 +112,7 @@ function Chat ({ user }) {
               </button> */}
             </div>
             <div>
-              <Form
-                onSubmit={onMessageSubmit}>
+              <Form onSubmit={onMessageSubmit}>
                 <Form.Group controlId='message'>
                   <Form.Label>Message</Form.Label>
                   <Form.Control
@@ -135,13 +129,13 @@ function Chat ({ user }) {
                   />
                   <div className='message-submit col-2'>
                     <Button
-                      className = 'message-submit-button'
+                      className='message-submit-button'
                       variant='primary'
                       type='submit'>
                       <u>S</u>end
                     </Button>
                     <Button
-                      className = 'message-clear-button'
+                      className='message-clear-button'
                       variant='secondary'
                       onClick={handleReset}>
                       <u>C</u>lear
@@ -160,7 +154,6 @@ function Chat ({ user }) {
         </div>
       </div>
     </div>
-
   )
 }
 
