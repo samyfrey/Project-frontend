@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-import { createProfile, deleteProfile } from '../../api/routes'
+import { createProfile, deleteProfile, updateProfile } from '../../api/profile'
 import { createProfileSuccess, createProfileFailure } from '../AutoDismissAlert/messages'
 
 function Profile ({ msgAlert, user }) {
@@ -38,14 +38,27 @@ function Profile ({ msgAlert, user }) {
     setUserName(target.value)
   }
 
+  const onUpdateProfile = ({ target }) => {
+    console.log('id ', target.className.slice(0, 24))
+    const id = target.className.slice(0, 24)
+    updateProfile(id, userName, user)
+      .then((res) => {
+        console.log('update successful', res.data)
+        const profileArray = profileList.filter(profile => profile._id !== id)
+        profileArray.push(res.data.userProfile)
+        setProfileList(profileArray)
+      })
+      .catch(console.error)
+  }
+
   const onDeleteProfile = (event) => {
     console.log('id ', event.target.className.slice(0, 24))
     const id = event.target.className.slice(0, 24)
     deleteProfile(id, user)
       .then(() => {
         console.log('deletion successful')
-        const array = profileList.filter(prof => prof._id !== id)
-        setProfileList(array)
+        const profileArray = profileList.filter(profile => profile._id !== id)
+        setProfileList(profileArray)
       })
       .catch(console.error)
   }
@@ -56,6 +69,7 @@ function Profile ({ msgAlert, user }) {
         <h3>
           {username}
         </h3>
+        <Button className={_id} variant='secondary' type='button' onClick={onUpdateProfile}>Update</Button>
         <Button className={_id} variant='danger' type='button' onClick={onDeleteProfile}>Delete</Button>
       </div>
     ))

@@ -10,7 +10,6 @@ import Button from 'react-bootstrap/Button'
 const SignIn = ({ msgAlert, setUser, history }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  // const [shouldNavigate, setShouldNavigate] = useState(false)
 
   const handleChange = ({ target }) => {
     if (target.name === 'email') {
@@ -24,14 +23,13 @@ const SignIn = ({ msgAlert, setUser, history }) => {
     event.preventDefault()
 
     const formData = {
-      email: email,
-      password: password
+      email,
+      password
     }
 
     signIn(formData)
       .then((res) => {
         setUser(res.data.user)
-        // setShouldNavigate(true)
         console.log('user ', res.data.user)
       })
       .then(() =>
