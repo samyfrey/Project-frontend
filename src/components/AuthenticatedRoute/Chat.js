@@ -19,6 +19,7 @@ const socket = io(apiUrl, {
 function Chat ({ user }) {
   const [state, setState] = useState({ message: '', name: 'Guest' })
   const [chat, setChat] = useState([])
+  const [textColor, setTextColor] = useState('#000000')
 
   useEffect(() => {
     if (user.userProfile[0]) {
@@ -34,6 +35,10 @@ function Chat ({ user }) {
 
   const handleChange = event => {
     setState({ ...state, [event.target.name]: event.target.value })
+  }
+
+  const handleColorChange = event => {
+    setTextColor(event.target.value)
   }
 
   const handleKeyPress = event => {
@@ -60,7 +65,7 @@ function Chat ({ user }) {
         {chat.map(({ name, message }, index) => (
           <div key={index}>
             <h3>
-              {name}: <span>{message}</span>
+              {name}: <span style={{ color: textColor }}>{message}</span>
             </h3>
           </div>
         ))}
@@ -83,9 +88,7 @@ function Chat ({ user }) {
           </div>
         </div>
         <div className='container'>
-          <div className='item chat-box'>
-            {renderChat()}
-          </div>
+          <div className='item chat-box'>{renderChat()}</div>
           <div className='item img'>
             <div className='img-display-picture'>
               <img src={displayPicture} />
@@ -95,26 +98,31 @@ function Chat ({ user }) {
             <div className='message_buttons-bar'>
               {/* <button className='message-buttons' title='Send an emoticon'>
   😊
-              </button>
-              <button className='message-buttons' title='Send a wink'>
+              </button> */}
+              {/* <button className='message-buttons' title='Send a wink'>
   😉
-              </button>
-              <button
+              </button> */}
+              {/* <button
                 className='message-buttons'
                 id='nudge-button'
                 title='Send a nudge'>
   🥴
-              </button>
-              <button className='message-buttons' title='Change the font'>
-  🔤
-              </button>
-              <button className='message-buttons' title='Change text color'>
-  🎨
               </button> */}
+              {/* <button className='message-buttons' title='Change the font'>
+  🔤
+              </button> */}
+              <Form>
+                <Form.Control
+                  type='color'
+                  id='text-color'
+                  title='Choose text color'
+                  name='color'
+                  onChange={(e) => handleColorChange(e)}
+                />
+              </Form>
             </div>
             <div>
-              <Form
-                onSubmit={onMessageSubmit}>
+              <Form onSubmit={onMessageSubmit}>
                 <Form.Group controlId='message'>
                   <Form.Label>Message</Form.Label>
                   <Form.Control
@@ -131,13 +139,13 @@ function Chat ({ user }) {
                   />
                   <div className='message-submit col-2'>
                     <Button
-                      className = 'message-submit-button'
+                      className='message-submit-button'
                       variant='primary'
                       type='submit'>
                       <u>S</u>end
                     </Button>
                     <Button
-                      className = 'message-clear-button'
+                      className='message-clear-button'
                       variant='secondary'
                       onClick={handleReset}>
                       <u>C</u>lear
@@ -156,7 +164,6 @@ function Chat ({ user }) {
         </div>
       </div>
     </div>
-
   )
 }
 
