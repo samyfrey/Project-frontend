@@ -13,18 +13,18 @@ const authenticatedOptions = (
   </Fragment>
 )
 
-const unauthenticatedOptions = (
-  <Fragment>
-    <NavLink to='/sign-up' className='nav-link'>Sign Up</NavLink>
-    <NavLink to='/sign-in' className='nav-link'>Sign In</NavLink>
-  </Fragment>
-)
+// const unauthenticatedOptions = (
+//   <Fragment>
+//     <NavLink to='/sign-up' className='nav-link'>Sign Up</NavLink>
+//     <NavLink to='/sign-in' className='nav-link'>Sign In</NavLink>
+//   </Fragment>
+// )
 
-const alwaysOptions = (
-  <Fragment>
-    <NavLink exact to='/' className='nav-link'>Home</NavLink>
-  </Fragment>
-)
+// const alwaysOptions = (
+//   <Fragment>
+//     <NavLink exact to='/' className='nav-link'>Home</NavLink>
+//   </Fragment>
+// )
 
 const Header = ({ user }) => (
   <Navbar expand='md'>
@@ -40,9 +40,9 @@ const Header = ({ user }) => (
           {user && (
             <span className='navbar-text mr-2'>Welcome, {user.email}</span>
           )}
-          {/* {user ? authenticatedOptions : ''} */}
-          {alwaysOptions}
-          {user ? authenticatedOptions : unauthenticatedOptions}
+          {/* {alwaysOptions} */}
+          {/* {user ? authenticatedOptions : unauthenticatedOptions} */}
+          {user ? authenticatedOptions : ''}
         </Nav>
       </Navbar.Collapse>
     </StyledHeader>

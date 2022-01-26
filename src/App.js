@@ -2,7 +2,6 @@
 import React, { Component, Fragment } from 'react'
 import { Route } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
-
 import AuthenticatedRoute from './components/AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from './components/AutoDismissAlert/AutoDismissAlert'
 import Header from './components/Header/Header'
@@ -47,10 +46,9 @@ class App extends Component {
 
     return (
       <StyledContainer>
-
         <Fragment>
           <Header user={user} />
-          {msgAlerts.map(msgAlert => (
+          {msgAlerts.map((msgAlert) => (
             <AutoDismissAlert
               key={msgAlert.id}
               heading={msgAlert.heading}
@@ -61,7 +59,24 @@ class App extends Component {
             />
           ))}
           <main className='container'>
+            {/* test to merge sign in sign up on landing page */}
+            {/* <Route
+              path='/'
+              element={<SignIn msgAlert={this.msgAlert} />}
+            /> */}
             <Route
+              exact
+              path='/'
+              render={() => (
+                <Fragment className="home-page">
+                  <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
+                  <SignUp msgAlert={this.msgAlert} setUser={this.setUser} />
+                </Fragment>
+              )}
+            />
+
+            {/* end of test section  */}
+            {/* <Route
               path='/sign-up'
               render={() => (
                 <SignUp msgAlert={this.msgAlert} setUser={this.setUser} />
@@ -72,7 +87,7 @@ class App extends Component {
               render={() => (
                 <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
               )}
-            />
+            /> */}
             <AuthenticatedRoute
               user={user}
               path='/sign-out'
@@ -91,13 +106,11 @@ class App extends Component {
                 <ChangePassword msgAlert={this.msgAlert} user={user} />
               )}
             />
-
             <AuthenticatedRoute
               user={user}
               path='/chat'
               render={() => <Chat msgAlert={this.msgAlert} user={user} />}
             />
-
             <AuthenticatedRoute
               user={user}
               path='/profile'
