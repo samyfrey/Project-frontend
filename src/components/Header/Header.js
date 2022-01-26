@@ -29,7 +29,7 @@ const authenticatedOptions = (
 const Header = ({ user }) => (
   <Navbar expand='md'>
     <Navbar.Brand>
-      <Link to='/'>
+      <Link to={user ? undefined : '/'}>
         <img src='images/logo_white.png' alt='logo' />
       </Link>
     </Navbar.Brand>
