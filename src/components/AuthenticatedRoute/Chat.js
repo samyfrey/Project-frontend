@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button'
 import ScrollToBottom from 'react-scroll-to-bottom'
 
 import './styles/chat.css'
+import nudgeSound from './styles/nudge.mp3'
 const displayPicture = 'http://2.bp.blogspot.com/_r1kMibaacEs/TLVQgzYP33I/AAAAAAAAJXk/j8T-F70lTQ8/s320/Windows+Live+Messenger+2011+v15.4.3502.922+FINAL+%28Espa%C3%B1ol%29.jpg'
 
 // import { getUserProfile } from '../../api/routes'
@@ -39,6 +40,22 @@ function Chat ({ user }) {
 
   const handleColorChange = event => {
     setTextColor(event.target.value)
+  }
+
+  const handleNudge = () => {
+    const window = document.body
+    const { name } = state
+    window.className = 'is-nudged'
+    socket.emit('message', { name, message: 'has nudged' })
+    playNudgeSound()
+    setTimeout(() => {
+      window.className = ''
+    }, 1000)
+  }
+
+  const playNudgeSound = () => {
+    const useSound = new Audio(nudgeSound)
+    useSound.play()
   }
 
   const handleKeyPress = event => {
@@ -95,36 +112,31 @@ function Chat ({ user }) {
             </div>
           </div>
           <div className='item send-message'>
-            <div className='message_buttons-bar'>
+            <div className='message-buttons-bar d-flex'>
               {/* <button className='message-buttons' title='Send an emoticon'>
   😊
               </button> */}
-              {/* <button className='message-buttons' title='Send a wink'>
-  😉
-              </button> */}
-              {/* <button
+
+              <button
                 className='message-buttons'
                 id='nudge-button'
-                title='Send a nudge'>
+                title='Send a nudge'
+                onClick={(e) => handleNudge(e)}>
   🥴
-              </button> */}
-              {/* <button className='message-buttons' title='Change the font'>
-  🔤
-              </button> */}
-              <Form>
-                <Form.Control
-                  type='color'
-                  id='text-color'
-                  title='Choose text color'
-                  name='color'
-                  onChange={(e) => handleColorChange(e)}
-                />
-              </Form>
+              </button>
+
+              <Form.Control
+                className='d-flex'
+                type='color'
+                id='text-color'
+                title='Choose text color'
+                name='color'
+                onChange={(e) => handleColorChange(e)}
+              />
             </div>
             <div>
               <Form onSubmit={onMessageSubmit}>
                 <Form.Group controlId='message'>
-                  <Form.Label>Message</Form.Label>
                   <Form.Control
                     required
                     type='text'
@@ -154,7 +166,6 @@ function Chat ({ user }) {
                 </Form.Group>
               </Form>
             </div>
-            {/* <div className="sent-message-info">Last message received at 2:00 PM on 12/16/2006.</div> */}
           </div>
           <div className='item img'>
             <div className='img-display-picture'>
