@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button'
 import ScrollToBottom from 'react-scroll-to-bottom'
 
 import './styles/chat.css'
+import nudgeSound from './styles/nudge.mp3'
 const displayPicture = 'http://2.bp.blogspot.com/_r1kMibaacEs/TLVQgzYP33I/AAAAAAAAJXk/j8T-F70lTQ8/s320/Windows+Live+Messenger+2011+v15.4.3502.922+FINAL+%28Espa%C3%B1ol%29.jpg'
 
 // import { getUserProfile } from '../../api/routes'
@@ -19,6 +20,7 @@ const socket = io(apiUrl, {
 function Chat ({ user }) {
   const [state, setState] = useState({ message: '', name: 'Guest' })
   const [chat, setChat] = useState([])
+  const [textColor, setTextColor] = useState('#000000')
 
   useEffect(() => {
     if (user.userProfile[0]) {
@@ -36,7 +38,29 @@ function Chat ({ user }) {
     setState({ ...state, [event.target.name]: event.target.value })
   }
 
-  const handleKeyPress = (event) => {
+
+  const handleColorChange = event => {
+    setTextColor(event.target.value)
+  }
+
+  const handleNudge = () => {
+    const window = document.body
+    const { name } = state
+    window.className = 'is-nudged'
+    socket.emit('message', { name, message: 'has nudged' })
+    playNudgeSound()
+    setTimeout(() => {
+      window.className = ''
+    }, 1000)
+  }
+
+  const playNudgeSound = () => {
+    const useSound = new Audio(nudgeSound)
+    useSound.play()
+  }
+
+  const handleKeyPress = event => {
+
     if (event.key === 'Enter' && !event.shiftKey) {
       onMessageSubmit(event)
     }
@@ -60,7 +84,7 @@ function Chat ({ user }) {
         {chat.map(({ name, message }, index) => (
           <div key={index}>
             <h3>
-              {name}: <span>{message}</span>
+              <span style={{ fontWeight: 'bold' }}>{name}:</span> <span style={{ color: textColor }}>{message}</span>
             </h3>
           </div>
         ))}
@@ -90,30 +114,31 @@ function Chat ({ user }) {
             </div>
           </div>
           <div className='item send-message'>
-            <div className='message_buttons-bar'>
+            <div className='message-buttons-bar d-flex'>
               {/* <button className='message-buttons' title='Send an emoticon'>
   😊
-              </button>
-              <button className='message-buttons' title='Send a wink'>
-  😉
-              </button>
+              </button> */}
+
               <button
                 className='message-buttons'
                 id='nudge-button'
-                title='Send a nudge'>
+                title='Send a nudge'
+                onClick={(e) => handleNudge(e)}>
   🥴
               </button>
-              <button className='message-buttons' title='Change the font'>
-  🔤
-              </button>
-              <button className='message-buttons' title='Change text color'>
-  🎨
-              </button> */}
+
+              <Form.Control
+                className='d-flex'
+                type='color'
+                id='text-color'
+                title='Choose text color'
+                name='color'
+                onChange={(e) => handleColorChange(e)}
+              />
             </div>
             <div>
               <Form onSubmit={onMessageSubmit}>
                 <Form.Group controlId='message'>
-                  <Form.Label>Message</Form.Label>
                   <Form.Control
                     required
                     type='text'
@@ -143,7 +168,6 @@ function Chat ({ user }) {
                 </Form.Group>
               </Form>
             </div>
-            {/* <div className="sent-message-info">Last message received at 2:00 PM on 12/16/2006.</div> */}
           </div>
           <div className='item img'>
             <div className='img-display-picture'>
