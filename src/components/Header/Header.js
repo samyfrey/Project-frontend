@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { StyledHeader } from '../styles/Header.styled'
 
 const authenticatedOptions = (
@@ -27,11 +27,11 @@ const authenticatedOptions = (
 // )
 
 const Header = ({ user }) => (
-  <Navbar expand='md'>
+  <Navbar expand='md' className="justify-content-center">
     <Navbar.Brand>
-      <Link >
-        <img src='images/logo_white.png' alt='logo' />
-      </Link>
+
+      <img src='images/logo_white.png' alt='logo' />
+
     </Navbar.Brand>
     <StyledHeader>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
